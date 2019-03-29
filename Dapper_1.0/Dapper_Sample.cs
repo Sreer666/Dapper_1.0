@@ -28,12 +28,6 @@ namespace Dapper_1._0
                     Console.WriteLine(item);
                 }
             }
-            if(Medisys_Dev.Database== "reports")
-            {
-                string member_idquery = "Select distinct member_id FROM stat_his..member_status with(nolock) WHERE member_id IN('11937') and status_cd='PENDNG'";
-                var results = Medisys_Dev.Query<int>(member_idquery).Single();
-                Console.WriteLine(results);
-            }
         }
     }
     public class CommonVariables
@@ -41,11 +35,6 @@ namespace Dapper_1._0
         public static String ConnectionStringsEmployeeModel
         {
             get { return ConfigurationManager.ConnectionStrings["EmployeeModel"].ConnectionString; }
-        }
-            public static String ConnectionStringMedisys_Dev
-        {
-
-            get { return ConfigurationManager.ConnectionStrings["Medisys_Dev"].ConnectionString; }
         }
     }
 
