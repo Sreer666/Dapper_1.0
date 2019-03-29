@@ -16,7 +16,6 @@ namespace Dapper_1._0
         static void Main(string[] args)
         {
            IDbConnection EmployeeModeldb = new SqlConnection(CommonVariables.ConnectionStringsEmployeeModel);
-           IDbConnection Medisys_Dev = new SqlConnection(CommonVariables.ConnectionStringMedisys_Dev);
 
             if (EmployeeModeldb.Database == "CodeFirstNewDatabaseSample.BloggingContext")
             {
@@ -37,17 +36,4 @@ namespace Dapper_1._0
             get { return ConfigurationManager.ConnectionStrings["EmployeeModel"].ConnectionString; }
         }
     }
-
-    //public class DbConnect
-    //{
-    //    static IDbConnection db = new SqlConnection(CommonVariables.ConnectionString);
-
-    //   public void DbconnectMethod()
-    //    {
-    //        string query = "Select distinct member_id FROM stat_his..member_status with(nolock) WHERE member_id IN('11937') and status_cd='PENDNG'";
-    //        db.Query<int>(query).Single();
-    //    }
-    //}
-
-
 }
