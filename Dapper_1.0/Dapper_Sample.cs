@@ -15,18 +15,36 @@ namespace Dapper_1._0
     {
         static void Main(string[] args)
         {
-           IDbConnection db = new SqlConnection(CommonVariables.ConnectionString);
+           IDbConnection EmployeeModeldb = new SqlConnection(CommonVariables.ConnectionStringsEmployeeModel);
+           IDbConnection Medisys_Dev = new SqlConnection(CommonVariables.ConnectionStringMedisys_Dev);
 
-           string query = "Select distinct member_id FROM stat_his..member_status with(nolock) WHERE member_id IN('11937') and status_cd='PENDNG'";
-           var results =  db.Query<int>(query).Single();
-            Console.WriteLine(results);
+            if (EmployeeModeldb.Database == "CodeFirstNewDatabaseSample.BloggingContext")
+            {
+                string DepartmentsQuery = "Select * from Departments";
+                var DepartmentsResults = EmployeeModeldb.Query<int>(DepartmentsQuery);
 
+                foreach (var item in DepartmentsResults)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            if(Medisys_Dev.Database== "reports")
+            {
+                string member_idquery = "Select distinct member_id FROM stat_his..member_status with(nolock) WHERE member_id IN('11937') and status_cd='PENDNG'";
+                var results = Medisys_Dev.Query<int>(member_idquery).Single();
+                Console.WriteLine(results);
+            }
         }
     }
     public class CommonVariables
     {
-        public static String ConnectionString
+        public static String ConnectionStringsEmployeeModel
         {
+            get { return ConfigurationManager.ConnectionStrings["EmployeeModel"].ConnectionString; }
+        }
+            public static String ConnectionStringMedisys_Dev
+        {
+
             get { return ConfigurationManager.ConnectionStrings["Medisys_Dev"].ConnectionString; }
         }
     }
